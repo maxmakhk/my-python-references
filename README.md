@@ -1,0 +1,5 @@
+- sound_recognition <-- I made the api to connect sound generate AI
+- wifi_led_buzzer <-- Arduino Project, using the web page to control the buzzer to play difference melody
+- WiFiWebServer.ino <-- try to make the local server by ESP32
+- motorCar.ino <-- mortor Car project
+- touch_Sensor.ino <--- touch sensor project
