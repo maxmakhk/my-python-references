@@ -1,0 +1,129 @@
+
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Max Mak">
+    <meta name="generator" content="">
+    <title>HOME REMOTE</title>
+
+    <script src="http://www.naturedesign.com.hk/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="http://www.naturedesign.com.hk/css/bootstrap.min.css">
+    <script src="http://www.naturedesign.com.hk/js/bootstrap.min.js"></script>
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+	<script>
+    $(document).ready(function(){
+	
+		$("body").on( "click", "#lightOn", function() {
+
+                inputtextvalue = $("#melodyValue").val();
+				sendJSON('http://maxfamily.ddns.net:8082/on',"[]");
+
+        });
+		
+		$("body").on( "click", "#lightOff", function() {
+
+                inputtextvalue = $("#melodyValue").val();
+				sendJSON('http://maxfamily.ddns.net:8082/off',"[]");
+
+        });
+	
+		$("body").on( "click", "#melodyBtn", function() {
+
+                inputtextvalue = $("#melodyValue").val();
+				sendJSON('http://maxfamily.ddns.net:8082/sing?melody='+ inputtextvalue,"[]");
+
+        });
+		
+		
+		sendJSON = function(thisURL, thisContent){
+            
+            console.log("[sendJSON]");
+            console.log(thisURL);
+            console.log(thisContent);
+
+            var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+            xmlhttp.open("POST", thisURL);
+            xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttp.send(JSON.stringify(thisContent));
+            xmlhttp.onload = function() {
+                if (xmlhttp.status >= 200 && xmlhttp.status < 400) {
+                    // Success!
+                    console.log(xmlhttp.responseText);
+                    //var resp = JSON.parse(xmlhttp.responseText);
+                    console.log("[LOADED]");
+                    console.log(xmlhttp);
+                    //console.log(resp);
+                    
+                    
+                    if(resp.result == "ok"){
+                        console.log("[in fb_new_reg]");
+                        //window.location.href = "signup.php";
+                    }
+                    
+
+                }
+            };
+
+        }//receiveJSON ---END---
+	});
+	</script>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer.css" rel="stylesheet">
+  </head>
+  <body class="d-flex flex-column h-100">
+    <!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+  <div class="container">
+    
+		<div class="card mb-3">
+			<div class="card-body">
+				<button type="button" class="btn btn-outline-success btn-lg btn-block" id="lightOn"><i class="fa fa-lightbulb"></i> Light On</button>
+			</div>
+		</div>
+		
+		<div class="card mb-3">
+			<div class="card-body">
+				<button type="button" class="btn btn-outline-dark btn-lg btn-block" id="lightOff"><i class="fa fa-lightbulb"></i> Light Off</button>
+			</div>
+		</div>
+		
+		<div class="card mb-3">
+			<div class="card-body">
+				<label>'c', 'd', 'e', 'f', 'g', 'a', 'b', 'C'</label>
+					<input type="text" class="form-control mb-3" id="melodyValue" value="cdefgab">
+					<input type="text" class="form-control mb-3" id="beatValue" value="111111111111111111">
+					<button type="button" class="btn btn-outline-dark btn-lg btn-block" id="melodyBtn"><i class="fa fa-music"></i> Melody</button>
+			</div>
+		</div>
+  </div>
+</main>
+
+<footer class="footer mt-auto py-3">
+
+</footer>
+</body>
+</html>
